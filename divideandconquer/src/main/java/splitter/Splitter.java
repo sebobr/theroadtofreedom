@@ -137,6 +137,7 @@ public class Splitter extends Configured implements Tool {
 				System.out.println(key);
 				String type = key.split("\\^")[0];
 				String version = key.split("\\^")[1];
+				
 				if (type.equals("MDWTXN"))
 				{
 					String[] extractor = value.trim().replaceAll("^\\^", "NULL\\^").replaceAll("\\^\\^" , "\\^NULL\\^").split("\\^");	
@@ -161,6 +162,7 @@ public class Splitter extends Configured implements Tool {
 						successind = "1";
 					}
 				}
+				
 				String path = timestamp + "/" + type + "_" + version + ".csv";
 				this.path.set(path);
 				word.set(value);
@@ -169,9 +171,9 @@ public class Splitter extends Configured implements Tool {
 			}
 			dataline = dataline + timestamp + " " + successind + " hostname=" + hostname + " agentcity=" + agentcity + " targetcity=" + targetcity ;
 			String tsdbdatapath = "tsdbdata";
-			this.path.set(tsdbdatapath);
+			this.tsdbdatapath.set(tsdbdatapath);
 			word.set(dataline);
-			mos.write("logs", NullWritable.get(), new Text(dataline), path);
+			mos.write("logs", NullWritable.get(), new Text(dataline), tsdbdatapath);
 		}
 	}
 
