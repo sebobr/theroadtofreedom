@@ -124,6 +124,10 @@ public class Splitter extends Configured implements Tool {
 			// }
 			String timestamp = blocks[0];
 			String dataline = "statfail ";
+			String hostname = "host";
+			String agentcity = "agt";
+			String targetcity = "tgt";
+			String successind = "1";
 			int count = keys.length;
 			for (int i = 0; i < count; i++) {
 				String value = blocks[i + 5].substring(0,
@@ -136,13 +140,13 @@ public class Splitter extends Configured implements Tool {
 				if (type.equals("MDWTXN"))
 				{
 					String[] extractor = value.trim().replaceAll("^\\^", "NULL\\^").replaceAll("\\^\\^" , "\\^NULL\\^").split("\\^");	
-					String hostname = extractor[0];
+					hostname = extractor[0];
 				}
 				if (type.equals("MDWEDIBL"))
 				{
 					String[] extractor = value.trim().replaceAll("^\\^", "NULL\\^").replaceAll("\\^\\^" , "\\^NULL\\^").split("\\^");	
-					String agentcity = extractor[0];
-					String targetcity = extractor[13];
+					agentcity = extractor[0];
+					targetcity = extractor[13];
 				}
 				if (type.equals("EDI"))
 				{
@@ -150,11 +154,11 @@ public class Splitter extends Configured implements Tool {
 					String status = extractor[9];
 					if (status.equals("0"))
 					{
-						String successind = "0";
+						successind = "0";
 					}
 					else 
 					{
-						String successind = "1";
+						successind = "1";
 					}
 				}
 				String path = timestamp + "/" + type + "_" + version + ".csv";
@@ -163,9 +167,9 @@ public class Splitter extends Configured implements Tool {
 				System.out.println("value " + i + ": " + value);
 				mos.write("logs", NullWritable.get(), new Text(value), path);
 			}
-			String dataline = dataline + timestamp + " " + successind + " hostname=" + hostname + " agentcity=" + agentcity + " targetcity=" + targetcity ;
+			dataline = dataline + timestamp + " " + successind + " hostname=" + hostname + " agentcity=" + agentcity + " targetcity=" + targetcity ;
 			String tsdbdatapath = "tsdbdata";
-			this.path.set(path);
+			this.path.set(tsdbdatapath);
 			word.set(dataline);
 			mos.write("logs", NullWritable.get(), new Text(dataline), path);
 		}
