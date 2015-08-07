@@ -123,11 +123,24 @@ public class Splitter extends Configured implements Tool {
 			// System.out.println("key "+i+": "+keys [i]);
 			// }
 			String timestamp = blocks[0];
+			String dataline = "statfail ";
 			int count = keys.length;
 			for (int i = 0; i < count; i++) {
 				String value = blocks[i + 5].substring(0,
 						blocks[i + 5].length());
 				String key = keys[i];
+				if (key.equals("MDWTXN")
+				{
+					
+				}
+				if (key.equals("MDWEDIBL")
+				{
+					
+				}
+				if (key.equals("EDI")
+				
+				
+				
 				System.out.println(key);
 				String type = key.split("\\^")[0];
 				String version = key.split("\\^")[1];
@@ -137,6 +150,11 @@ public class Splitter extends Configured implements Tool {
 				System.out.println("value " + i + ": " + value);
 				mos.write("logs", NullWritable.get(), new Text(value), path);
 			}
+			String dataline = dataline + timestamp;
+			String tsdbdatapath = "tsdbdata"
+			this.path.set(path);
+			word.set(dataline);
+			mos.write("logs", NullWritable.get(), new Text(value), path);
 		}
 	}
 
