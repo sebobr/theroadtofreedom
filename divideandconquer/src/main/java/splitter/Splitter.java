@@ -140,26 +140,31 @@ public class Splitter extends Configured implements Tool {
 				
 				if (type.equals("MDWTXN"))
 				{
-					String[] extractor = value.trim().replaceAll("^\\^", "\\^empty\\^").replaceAll("\\^\\^" , "\\^empty\\^").split("\\^");	
+					//String[] extractor = value.trim().replaceAll("^\\^", "\\^empty\\^").replaceAll("\\^\\^" , "\\^empty\\^").split("\\^");	
+					String[] extractor = value.trim().split("\\^");
 					hostname = extractor[0];
 				}
 				if (type.equals("MDWEDIBL"))
 				{
-					String[] extractor = value.trim().replaceAll("^\\^", "\\^empty\\^").replaceAll("\\^\\^" , "\\^empty\\^").split("\\^");	
+					String[] extractor = value.trim().split("\\^");
+					//String[] extractor = value.trim().replaceAll("^\\^", "\\^empty\\^").replaceAll("\\^\\^" , "\\^empty\\^").split("\\^");	
 					agentcity = extractor[0];
 					targetcity = extractor[13];
 				}
 				if (type.equals("EDI"))
 				{
-					String[] extractor = value.trim().replaceAll("^\\^", "\\^empty\\^").replaceAll("\\^\\^" , "\\^empty\\^").split("\\^");
+					String[] extractor = value.trim().split("\\^");
+					//String[] extractor = value.trim().replaceAll("^\\^", "\\^empty\\^").replaceAll("\\^\\^" , "\\^empty\\^").split("\\^");
 					String status = extractor[9];
 					if (status.equals("0"))
 					{
-						successind = "0";
+						successind = status;
+						//successind = "0";
 					}
 					else 
 					{
-						successind = "1";
+						successind = status;
+						//successind = "1";
 					}
 				}
 				
