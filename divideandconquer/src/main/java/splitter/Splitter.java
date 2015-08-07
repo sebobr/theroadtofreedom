@@ -173,7 +173,7 @@ public class Splitter extends Configured implements Tool {
 			String tsdbdatapath = "tsdbdata";
 			this.path.set(tsdbdatapath);
 			word.set(dataline);
-			mos.write("logs", NullWritable.get(), new Text(dataline), path);
+			mos.write("logs", NullWritable.get(), new Text(dataline), tsdbdatapath);
 		}
 	}
 
