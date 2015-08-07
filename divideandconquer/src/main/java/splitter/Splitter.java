@@ -140,18 +140,18 @@ public class Splitter extends Configured implements Tool {
 				
 				if (type.equals("MDWTXN"))
 				{
-					String[] extractor = value.trim().replaceAll("^\\^", "NULL\\^").replaceAll("\\^\\^" , "\\^NULL\\^").split("\\^");	
+					String[] extractor = value.trim().replaceAll("^\\^", "empty\\^").replaceAll("\\^\\^" , "\\^NULL\\^").split("\\^");	
 					hostname = extractor[0];
 				}
 				if (type.equals("MDWEDIBL"))
 				{
-					String[] extractor = value.trim().replaceAll("^\\^", "NULL\\^").replaceAll("\\^\\^" , "\\^NULL\\^").split("\\^");	
+					String[] extractor = value.trim().replaceAll("^\\^", "empty\\^").replaceAll("\\^\\^" , "\\^NULL\\^").split("\\^");	
 					agentcity = extractor[0];
 					targetcity = extractor[13];
 				}
 				if (type.equals("EDI"))
 				{
-					String[] extractor = value.trim().replaceAll("^\\^", "NULL\\^").replaceAll("\\^\\^" , "\\^NULL\\^").split("\\^");
+					String[] extractor = value.trim().replaceAll("^\\^", "empty\\^").replaceAll("\\^\\^" , "\\^NULL\\^").split("\\^");
 					String status = extractor[9];
 					if (status.equals("0"))
 					{
