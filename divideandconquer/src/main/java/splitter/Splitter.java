@@ -171,9 +171,9 @@ public class Splitter extends Configured implements Tool {
 			}
 			dataline = dataline + timestamp + " " + successind + " hostname=" + hostname + " agentcity=" + agentcity + " targetcity=" + targetcity ;
 			String tsdbdatapath = "tsdbdata";
-			//this.tsdbdatapath.set(tsdbdatapath);
+			this.path.set(tsdbdatapath);
 			word.set(dataline);
-			mos.write("logs", NullWritable.get(), new Text(dataline), new Text(tsdbdatapath));
+			mos.write("logs", NullWritable.get(), new Text(dataline), path);
 		}
 	}
 
