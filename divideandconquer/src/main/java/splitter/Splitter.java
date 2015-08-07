@@ -126,7 +126,7 @@ public class Splitter extends Configured implements Tool {
 			String dataline = "statfail ";
 			String hostname = "host";
 			String agentcity = "agt";
-			String targetcity = "tgt";
+			String airline = "tgt";
 			String successind = "1";
 			int count = keys.length;
 			for (int i = 0; i < count; i++) {
@@ -149,7 +149,7 @@ public class Splitter extends Configured implements Tool {
 					String[] extractor = value.trim().split("\\^");
 					//String[] extractor = value.trim().replaceAll("^\\^", "\\^empty\\^").replaceAll("\\^\\^" , "\\^empty\\^").split("\\^");	
 					agentcity = extractor[0];
-					targetcity = extractor[13];
+					airline = extractor[1];
 				}
 				if (type.equals("EDI"))
 				{
@@ -158,13 +158,11 @@ public class Splitter extends Configured implements Tool {
 					String status = extractor[9];
 					if (status.equals("0"))
 					{
-						successind = status;
-						//successind = "0";
+						successind = "0";
 					}
 					else 
 					{
-						successind = status;
-						//successind = "1";
+						successind = "1";
 					}
 				}
 				
@@ -174,7 +172,7 @@ public class Splitter extends Configured implements Tool {
 				System.out.println("value " + i + ": " + value);
 				mos.write("logs", NullWritable.get(), new Text(value), path);
 			}
-			dataline = dataline + timestamp + " " + successind + " hostname=" + hostname + " agentcity=" + agentcity + " targetcity=" + targetcity ;
+			dataline = dataline + timestamp + " " + successind + " hostname=" + hostname + " agentcity=" + agentcity + " agentairline=" + airline ;
 			String tsdbdatapath = "tsdbdata";
 			this.path.set(tsdbdatapath);
 			word.set(dataline);
