@@ -129,32 +129,45 @@ public class Splitter extends Configured implements Tool {
 				String value = blocks[i + 5].substring(0,
 						blocks[i + 5].length());
 				String key = keys[i];
-				if (key.equals("MDWTXN")
-				{
-					
-				}
-				if (key.equals("MDWEDIBL")
-				{
-					
-				}
-				if (key.equals("EDI")
-				
-				
-				
+
 				System.out.println(key);
 				String type = key.split("\\^")[0];
 				String version = key.split("\\^")[1];
+				if (type.equals("MDWTXN")
+				{
+					String[] extractor = value.trim().replaceAll("^\\^", "NULL\\^").replaceAll("\\^\\^" , "\\^NULL\\^").split("\\^");	
+					String hostname = extractor[0];
+				}
+				if (type.equals("MDWEDIBL")
+				{
+					String[] extractor = value.trim().replaceAll("^\\^", "NULL\\^").replaceAll("\\^\\^" , "\\^NULL\\^").split("\\^");	
+					String agentcity = extractor[0];
+					String targetcity = extractor[13];
+				}
+				if (type.equals("EDI")
+				{
+					String[] extractor = value.trim().replaceAll("^\\^", "NULL\\^").replaceAll("\\^\\^" , "\\^NULL\\^").split("\\^");
+					String status = extractor[9];
+					if (status.equals("0"))
+					{
+						String successind = "0";
+					}
+					else 
+					{
+						String successind = "1";
+					}
+				}
 				String path = timestamp + "/" + type + "_" + version + ".csv";
 				this.path.set(path);
 				word.set(value);
 				System.out.println("value " + i + ": " + value);
 				mos.write("logs", NullWritable.get(), new Text(value), path);
 			}
-			String dataline = dataline + timestamp;
+			String dataline = dataline + timestamp + " " + successind + " hostname=" + hostname + " agentcity=" + agentcity + " targetcity=" + targetcity ;
 			String tsdbdatapath = "tsdbdata"
 			this.path.set(path);
 			word.set(dataline);
-			mos.write("logs", NullWritable.get(), new Text(value), path);
+			mos.write("logs", NullWritable.get(), new Text(dataline), path);
 		}
 	}
 
