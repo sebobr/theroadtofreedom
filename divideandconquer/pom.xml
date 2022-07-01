@@ -14,7 +14,7 @@
     <scala-version>2.10.3</scala-version>
     <hive-version>0.13.1</hive-version>
     <junit-version>4.8.1</junit-version>
-    <hadoop-version>2.6.0</hadoop-version>
+    <hadoop-version>2.7.0</hadoop-version>
     <mockito-version>1.9.5</mockito-version>
   
   </properties>
